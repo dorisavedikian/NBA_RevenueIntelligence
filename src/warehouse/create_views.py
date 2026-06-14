@@ -9,12 +9,6 @@ Inputs:
 Outputs:
     SQL views for revenue, customers, funnel, and executive dashboard reporting.
 """
-import sys
-from pathlib import Path
-
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
-sys.path.append(str(PROJECT_ROOT))
-
 import sqlite3
 from src.config import DATABASE_PATH, SCHEMA_DIR
 

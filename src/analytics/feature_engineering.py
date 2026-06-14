@@ -9,12 +9,6 @@ Outputs:
     data/processed/model_dataset.csv
     SQL table: model_dataset
 """
-import sys
-from pathlib import Path
-
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
-sys.path.append(str(PROJECT_ROOT))
-
 import sqlite3
 import pandas as pd
 from src.config import DATABASE_PATH, MODEL_DATASET_PATH

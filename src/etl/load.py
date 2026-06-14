@@ -1,59 +1,56 @@
 """
 Purpose:
-    Load processed NBA revenue optimization CSV files into a SQLite database
-    for SQL analysis and Power BI dashboarding.
+    Load generated warehouse CSV files into the SQLite dimensional warehouse.
 
 Inputs:
-    data/processed/dim_games.csv
-    data/processed/dim_customers.csv
-    data/processed/dim_sections.csv
-    data/processed/dim_promotions.csv
-    data/processed/fact_ticket_transactions.csv
-    data/processed/fact_web_sessions.csv
+    data/warehouse/*.csv
 
 Outputs:
-    data/processed/nba_revenue_optimization.sqlite
+    data/warehouse/nba_revenue_optimization.sqlite
 """
-
-import sys
-from pathlib import Path
-
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
-sys.path.append(str(PROJECT_ROOT))
-
 import sqlite3
 import pandas as pd
-from src.config import DATABASE_PATH, PROCESSED_DIR
 
-DB_PATH = DATABASE_PATH
+from src.config import (
+    DATABASE_PATH,
+    DIM_GAMES_PATH,
+    DIM_CUSTOMERS_PATH,
+    DIM_SECTIONS_PATH,
+    DIM_PROMOTIONS_PATH,
+    FACT_TICKET_TRANSACTIONS_PATH,
+    FACT_WEB_SESSIONS_PATH,
+)
+
 
 TABLES = {
-    "dim_games": "dim_games.csv",
-    "dim_customers": "dim_customers.csv",
-    "dim_sections": "dim_sections.csv",
-    "dim_promotions": "dim_promotions.csv",
-    "fact_ticket_transactions": "fact_ticket_transactions.csv",
-    "fact_web_sessions": "fact_web_sessions.csv",
+    "dim_games": DIM_GAMES_PATH,
+    "dim_customers": DIM_CUSTOMERS_PATH,
+    "dim_sections": DIM_SECTIONS_PATH,
+    "dim_promotions": DIM_PROMOTIONS_PATH,
+    "fact_ticket_transactions": FACT_TICKET_TRANSACTIONS_PATH,
+    "fact_web_sessions": FACT_WEB_SESSIONS_PATH,
 }
 
 
 def load_csv_to_sql():
-    conn = sqlite3.connect(DB_PATH)
+    """Load all warehouse CSVs into SQLite."""
 
-    for table_name, file_name in TABLES.items():
-        file_path = PROCESSED_DIR / file_name
+    conn = sqlite3.connect(DATABASE_PATH)
 
-        if not file_path.exists():
-            raise FileNotFoundError(f"Missing file: {file_path}")
-
-        df = pd.read_csv(file_path)
+    for table_name, csv_path in TABLES.items():
+        df = pd.read_csv(csv_path)
         df.to_sql(table_name, conn, if_exists="replace", index=False)
-
-        print(f"Loaded {len(df):,} rows into {table_name}")
+        print(f"Loaded {table_name}")
 
     conn.close()
-    print(f"\nSQLite database created at: {DB_PATH}")
+
+    print(f"\nSQLite warehouse created:")
+    print(DATABASE_PATH)
+
+
+def main():
+    load_csv_to_sql()
 
 
 if __name__ == "__main__":
-    load_csv_to_sql()
+    main()

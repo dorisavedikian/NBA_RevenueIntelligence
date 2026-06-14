@@ -1,0 +1,6 @@
+promotion_id,promotion_name,discount_percent
+0,No Promotion,0.0
+1,Family Pack,0.15
+2,Student Night,0.25
+3,Military Discount,0.2
+4,Limited Time Offer,0.1

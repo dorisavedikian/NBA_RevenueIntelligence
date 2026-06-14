@@ -1,27 +1,44 @@
-venv/
-env/
+# -------------------------------------------------
+# Python
+# -------------------------------------------------
 __pycache__/
-*.pyc
+*.py[cod]
+*.pyo
+
+# Virtual Environment
 .venv/
+venv/
+
+# macOS
 .DS_Store
-*.sqlite
-data/processed/*.csv
-data/processed/*.sqlite
 
-data/raw/*
-data/processed/*
-!data/raw/.gitkeep
-!data/processed/.gitkeep
-
-*.sqlite
-*.db
-*.csv
-*.json
-*.parquet
-*.pbix
-
+# IDE
 .vscode/
-Downloads/
-*.dmg
-*.app
-*.nt
+.idea/
+
+# Environment Variables
+.env
+
+# Logs
+*.log
+
+# Jupyter
+.ipynb_checkpoints/
+
+# -------------------------------------------------
+# Generated Data (Large Files)
+# -------------------------------------------------
+data/processed/fact_ticket_transactions.csv
+data/processed/fact_web_sessions.csv
+data/processed/nba_revenue_optimization.sqlite
+
+# -------------------------------------------------
+# Power BI
+# -------------------------------------------------
+*.pbix.autosave
+
+# -------------------------------------------------
+# Output Figures (Generated)
+# -------------------------------------------------
+output/figures/*
+!output/figures/.gitkeep

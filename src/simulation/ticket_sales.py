@@ -1,29 +1,37 @@
 """
 Purpose:
     Generate realistic synthetic ticketing, customer, promotion, section,
-    and web funnel data for an NBA revenue optimization analytics project.
+    and web funnel data for an NBA revenue intelligence analytics project.
 
 Inputs:
     data/raw/clippers_games.csv if available; otherwise creates a fallback schedule.
 
 Outputs:
-    data/processed/dim_games.csv
-    data/processed/dim_customers.csv
-    data/processed/dim_sections.csv
-    data/processed/dim_promotions.csv
-    data/processed/fact_ticket_transactions.csv
-    data/processed/fact_web_sessions.csv
+    data/warehouse/dim_games.csv
+    data/warehouse/dim_customers.csv
+    data/warehouse/dim_sections.csv
+    data/warehouse/dim_promotions.csv
+    data/warehouse/fact_ticket_transactions.csv
+    data/warehouse/fact_web_sessions.csv
 """
-
-from pathlib import Path
 import numpy as np
 import pandas as pd
 
-np.random.seed(42)
+from src.config import (
+    RAW_DIR,
+    WAREHOUSE_DIR,
+    DIM_GAMES_PATH,
+    DIM_CUSTOMERS_PATH,
+    DIM_SECTIONS_PATH,
+    DIM_PROMOTIONS_PATH,
+    FACT_TICKET_TRANSACTIONS_PATH,
+    FACT_WEB_SESSIONS_PATH,
+    RANDOM_SEED,
+)
 
-RAW_DIR = Path("data/raw")
-PROCESSED_DIR = Path("data/processed")
-PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
+np.random.seed(RANDOM_SEED)
+
+WAREHOUSE_DIR.mkdir(parents=True, exist_ok=True)
 
 ARENA_CAPACITY = 18000
 
@@ -66,12 +74,14 @@ def load_or_create_games():
     dim_games["day_of_week"] = dim_games["game_date"].dt.day_name()
     dim_games["is_weekend"] = dim_games["day_of_week"].isin(["Friday", "Saturday", "Sunday"]).astype(int)
     dim_games["opponent_strength"] = dim_games["opponent"].map(premium_opponents)
+
     missing_strength = dim_games["opponent_strength"].isna()
     dim_games.loc[missing_strength, "opponent_strength"] = np.random.uniform(
         0.35,
         0.65,
-        missing_strength.sum()
+        missing_strength.sum(),
     )
+
     dim_games["arena_capacity"] = ARENA_CAPACITY
 
     return dim_games
@@ -137,13 +147,16 @@ def generate_transactions(dim_games, dim_sections, dim_promotions, dim_customers
             sell_through = np.clip(
                 demand_score * section_demand_multiplier + np.random.normal(0, 0.05),
                 0.35,
-                0.99
+                0.99,
             )
 
             seats_to_sell = int(section_capacity * sell_through)
 
             while seats_to_sell > 0:
-                seats_purchased = min(np.random.choice([1, 2, 3, 4], p=[0.25, 0.45, 0.15, 0.15]), seats_to_sell)
+                seats_purchased = min(
+                    np.random.choice([1, 2, 3, 4], p=[0.25, 0.45, 0.15, 0.15]),
+                    seats_to_sell,
+                )
 
                 customer = dim_customers.sample(1).iloc[0]
 
@@ -153,8 +166,13 @@ def generate_transactions(dim_games, dim_sections, dim_promotions, dim_customers
 
                 promotion_id = np.random.choice(
                     dim_promotions["promotion_id"],
-                    p=[1 - promotion_probability, promotion_probability * .35, promotion_probability * .30,
-                       promotion_probability * .15, promotion_probability * .20]
+                    p=[
+                        1 - promotion_probability,
+                        promotion_probability * 0.35,
+                        promotion_probability * 0.30,
+                        promotion_probability * 0.15,
+                        promotion_probability * 0.20,
+                    ],
                 )
 
                 promo = dim_promotions[dim_promotions["promotion_id"] == promotion_id].iloc[0]
@@ -231,12 +249,12 @@ def main():
     fact_transactions = generate_transactions(dim_games, dim_sections, dim_promotions, dim_customers)
     fact_web_sessions = generate_web_sessions(dim_games)
 
-    dim_games.to_csv(PROCESSED_DIR / "dim_games.csv", index=False)
-    dim_sections.to_csv(PROCESSED_DIR / "dim_sections.csv", index=False)
-    dim_promotions.to_csv(PROCESSED_DIR / "dim_promotions.csv", index=False)
-    dim_customers.to_csv(PROCESSED_DIR / "dim_customers.csv", index=False)
-    fact_transactions.to_csv(PROCESSED_DIR / "fact_ticket_transactions.csv", index=False)
-    fact_web_sessions.to_csv(PROCESSED_DIR / "fact_web_sessions.csv", index=False)
+    dim_games.to_csv(DIM_GAMES_PATH, index=False)
+    dim_sections.to_csv(DIM_SECTIONS_PATH, index=False)
+    dim_promotions.to_csv(DIM_PROMOTIONS_PATH, index=False)
+    dim_customers.to_csv(DIM_CUSTOMERS_PATH, index=False)
+    fact_transactions.to_csv(FACT_TICKET_TRANSACTIONS_PATH, index=False)
+    fact_web_sessions.to_csv(FACT_WEB_SESSIONS_PATH, index=False)
 
     print("Generated revenue optimization dataset.")
     print(f"Games: {len(dim_games)}")

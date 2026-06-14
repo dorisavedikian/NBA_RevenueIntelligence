@@ -1,6 +1,6 @@
 # 🏀 NBA Revenue Intelligence
 
-End-to-End Sports Revenue Analytics Platform for professional sports organizations.
+End-to-End Sports Revenue Analytics Platform for Professional Sports Organizations
 
 ![Python](https://img.shields.io/badge/Python-3.11-blue)
 
@@ -164,20 +164,23 @@ The project uses a dimensional star schema designed for analytical workloads.
 
 ### Dimension Tables
 
-- dim_customers
 - dim_games
-- dim_promotions
+- dim_customers
 - dim_sections
+- dim_promotions
 
 ### Fact Tables
 
-- executive_kpis
-- executive_recommendations
 - fact_ticket_transactions
 - fact_web_sessions
-- game_segments
+
+### Analytical Outputs
+
 - model_dataset
+- game_segments
 - revenue_forecasts
+- executive_kpis
+- executive_recommendations
 
 This design separates descriptive business entities from transactional data to support scalable reporting and machine learning workflows.
 
@@ -245,31 +248,49 @@ The objective is to help executives translate analytics into measurable business
 ```text
 NBA_RevenueIntelligence/
 │
-├── data/
-│   ├── raw/
-│   ├── external/
-│   └── processed/
-│
 ├── dashboard/
 │   ├── powerbi/
 │   └── screenshots/
 │
+├── data/
+│   ├── analytics/
+│   │   ├── executive_kpis.csv
+│   │   ├── executive_recommendations.csv
+│   │   ├── game_segments.csv
+│   │   ├── model_dataset.csv
+│   │   └── revenue_forecasts.csv
+│   │
+│   ├── external/
+│   ├── raw/
+│   └── warehouse/
+│       ├── dim_customers.csv
+│       ├── dim_games.csv
+│       ├── dim_promotions.csv
+│       ├── dim_sections.csv
+│       ├── fact_ticket_transactions.csv
+│       ├── fact_web_sessions.csv
+│       └── nba_revenue_optimization.sqlite
+│
 ├── docs/
 │   ├── images/
-│   ├── Architecture.md
-│   ├── BusinessCase.md
-│   └── DataDictionary.md
+│   ├── architecture.md
+│   ├── business_case.md
+│   ├── business_requirements.md
+│   ├── data_dictionary.md
+│   └── project_roadmap.md
 │
+├── notebooks/
 ├── output/
 │   └── figures/
 │
 ├── sql/
 │   ├── analytics/
 │   ├── schema/
+│   │   └── create_views.sql
 │   └── tests/
+│       └── qa_checks.sql
 │
 ├── src/
-│   │
 │   ├── analytics/
 │   │   ├── feature_engineering.py
 │   │   ├── kpi_engine.py
@@ -291,7 +312,6 @@ NBA_RevenueIntelligence/
 │   │   └── ticket_sales.py
 │   │
 │   ├── utils/
-│   │   ├── __init__.py
 │   │   ├── database.py
 │   │   ├── helpers.py
 │   │   └── logger.py
@@ -299,8 +319,8 @@ NBA_RevenueIntelligence/
 │   ├── visualization/
 │   │   ├── cluster_plots.py
 │   │   ├── forecast_plots.py
-│   │   ├── revenue_plots.py
-│   │   └── funnel_plots.py
+│   │   ├── funnel_plots.py
+│   │   └── revenue_plots.py
 │   │
 │   ├── warehouse/
 │   │   └── create_views.py
@@ -308,11 +328,6 @@ NBA_RevenueIntelligence/
 │   └── __init__.py
 │
 ├── tests/
-│   ├── test_etl.py
-│   ├── test_models.py
-│   ├── test_database.py
-│   └── test_pipeline.py
-│
 ├── .gitignore
 ├── LICENSE
 ├── main.py
@@ -370,19 +385,19 @@ Running `main.py` executes the complete analytics pipeline, including data gener
 
 ## Results
 
-The completed platform demonstrates a full analytics workflow representative of a modern sports business intelligence team. Starting with real NBA schedule data, the pipeline generates enterprise-scale operational data, builds a dimensional Dimensional Data Warehouse, engineers analytical features, trains machine learning models, and produces executive-ready datasets for dashboarding and decision support.
+The completed platform demonstrates a full analytics workflow representative of a modern sports business intelligence team. Starting with real NBA schedule data, the pipeline generates enterprise-scale operational data, builds a dimensional SQL data warehouse, engineers analytical features, trains machine learning models, and produces executive-ready datasets for dashboarding and decision support.
 
 The project showcases practical experience in data engineering, SQL development, predictive analytics, business intelligence, and software engineering while emphasizing how analytics can drive pricing, marketing, inventory, and revenue decisions.
 
 ## Pipeline Outputs
 
-The analytics pipeline produces:
+The pipeline generates the following analytical assets:
 
-- SQLite dimensional warehouse
+- SQLite dimensional data warehouse
 - Machine learning feature dataset
-- Game demand segments
+- K-Means demand segmentation
 - Revenue forecasts
-- Executive KPIs
+- Executive KPI dataset
 - Executive recommendations
 - Dashboard-ready SQL views
 
