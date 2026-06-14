@@ -4,3 +4,5 @@ scikit-learn
 sqlalchemy
 matplotlib
 requests
+nba_api
+
