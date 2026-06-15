@@ -23,6 +23,11 @@ venv/
 *.log
 logs/
 
+# Output Figures
+output/figures/*
+!output/figures/.gitkeep
+!output/figures/*.png
+
 # Jupyter
 .ipynb_checkpoints/
 
