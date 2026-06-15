@@ -5,6 +5,6 @@ sqlalchemy
 matplotlib
 requests
 nba_api
-black
+black==25.1.0
 ruff
 pytest
