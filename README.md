@@ -135,27 +135,28 @@ This approach enables the development of production-style data engineering pipel
 
 The analytics pipeline automatically generates executive datasets and visualizations that support downstream reporting and business intelligence.
 
-### Revenue by Opponent
-
-![Revenue by Opponent](output/figures/revenue_by_opponent.png)
-
----
-
-### Forecast vs Actual Revenue
-
-![Forecast](output/figures/forecast_vs_actual.png)
-
----
-
-### Game Demand Segments
-
-![Segments](output/figures/game_segments.png)
-
----
-
-### Ticket Purchase Funnel
-
-![Funnel](output/figures/checkout_funnel.png)
+<table>
+  <tr>
+    <td align="center">
+      <b>Revenue by Opponent</b><br>
+      <img src="output/figures/revenue_by_opponent.png" width="400">
+    </td>
+    <td align="center">
+      <b>Forecast vs Actual Revenue</b><br>
+      <img src="output/figures/forecast_vs_actual.png" width="400">
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <b>Game Demand Segments</b><br>
+      <img src="output/figures/game_segments.png" width="400">
+    </td>
+    <td align="center">
+      <b>Ticket Purchase Funnel</b><br>
+      <img src="output/figures/checkout_funnel.png" width="400">
+    </td>
+  </tr>
+</table>
 
 ## Platform Components
 
