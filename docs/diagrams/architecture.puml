@@ -1,0 +1,46 @@
+@startuml
+title NBA Revenue Intelligence Architecture
+
+skinparam componentStyle rectangle
+skinparam shadowing false
+
+package "Data Sources" {
+    [NBA API]
+}
+
+package "Simulation Layer" {
+    [Ticket Sales Simulation]
+}
+
+package "Data Engineering" {
+    [ETL Pipeline]
+    database "SQLite\nData Warehouse"
+}
+
+package "Analytics Layer" {
+    [Feature Engineering]
+    [K-Means Clustering]
+    [Regression Forecasting]
+}
+
+package "Business Intelligence" {
+    [KPI Engine]
+    [Recommendation Engine]
+    [Power BI Dashboard]
+}
+
+[NBA API] --> [Ticket Sales Simulation]
+[Ticket Sales Simulation] --> [ETL Pipeline]
+[ETL Pipeline] --> "SQLite\nData Warehouse"
+
+"SQLite\nData Warehouse" --> [Feature Engineering]
+[Feature Engineering] --> [K-Means Clustering]
+[Feature Engineering] --> [Regression Forecasting]
+
+[K-Means Clustering] --> [KPI Engine]
+[Regression Forecasting] --> [KPI Engine]
+
+[KPI Engine] --> [Recommendation Engine]
+[Recommendation Engine] --> [Power BI Dashboard]
+
+@enduml

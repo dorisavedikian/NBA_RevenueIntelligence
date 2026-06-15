@@ -112,7 +112,21 @@ This approach enables the development of production-style data engineering pipel
 
 ## System Architecture
 
+The platform follows a modular analytics architecture that separates data ingestion, ETL, warehousing, machine learning, and business intelligence into independent components.
+
 ![Architecture](docs/images/architecture.png)
+
+## Star Schema
+
+The dimensional warehouse uses a star schema to support analytical workloads and downstream reporting.
+
+![Star Schema](docs/images/star_schema.png)
+
+## Analytics Pipeline
+
+The end-to-end workflow begins with NBA schedule data, generates synthetic business data, performs feature engineering and machine learning, and produces executive-ready datasets for Power BI.
+
+![Pipeline](docs/images/pipeline.png)
 
 ## Platform Components
 

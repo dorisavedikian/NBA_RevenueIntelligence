@@ -1,0 +1,25 @@
+@startuml
+title End-to-End Analytics Pipeline
+
+start
+
+:Retrieve NBA Schedule;
+:Generate Synthetic Ticketing Data;
+:Load CSV Files;
+:Create SQLite Warehouse;
+:Feature Engineering;
+
+fork
+:K-Means Segmentation;
+fork again
+:Regression Forecasting;
+end fork
+
+:Generate Executive KPIs;
+:Generate Recommendations;
+:Build SQL Views;
+:Power BI Dashboard;
+
+stop
+
+@enduml

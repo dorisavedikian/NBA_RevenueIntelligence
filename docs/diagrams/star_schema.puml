@@ -1,0 +1,74 @@
+@startuml
+title NBA Revenue Intelligence Star Schema
+
+skinparam linetype ortho
+skinparam shadowing false
+
+entity "dim_games" as games {
+* game_id
+--
+game_date
+opponent
+day_of_week
+is_weekend
+opponent_strength
+arena_capacity
+}
+
+entity "dim_customers" as customers {
+* customer_id
+--
+age_group
+income_bracket
+zip_code
+season_ticket_holder
+}
+
+entity "dim_sections" as sections {
+* section_id
+--
+section_name
+capacity
+base_price
+}
+
+entity "dim_promotions" as promotions {
+* promotion_id
+--
+promotion_name
+discount_percent
+}
+
+entity "fact_ticket_transactions" as tickets {
+* transaction_id
+--
+game_id
+customer_id
+section_id
+promotion_id
+purchase_date
+ticket_price
+revenue
+channel
+device
+}
+
+entity "fact_web_sessions" as web {
+* session_id
+--
+game_id
+source
+device
+added_to_cart
+checkout_started
+purchased
+}
+
+games ||--o{ tickets
+customers ||--o{ tickets
+sections ||--o{ tickets
+promotions ||--o{ tickets
+
+games ||--o{ web
+
+@enduml
