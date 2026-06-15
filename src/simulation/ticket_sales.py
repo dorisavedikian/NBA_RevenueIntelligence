@@ -16,6 +16,10 @@ Outputs:
 """
 import numpy as np
 import pandas as pd
+import logging
+from src.utils.logger import configure_logging
+configure_logging()
+logger = logging.getLogger(__name__)
 
 from src.config import (
     RAW_DIR,
@@ -256,11 +260,11 @@ def main():
     fact_transactions.to_csv(FACT_TICKET_TRANSACTIONS_PATH, index=False)
     fact_web_sessions.to_csv(FACT_WEB_SESSIONS_PATH, index=False)
 
-    print("Generated revenue optimization dataset.")
-    print(f"Games: {len(dim_games)}")
-    print(f"Customers: {len(dim_customers)}")
-    print(f"Ticket transactions: {len(fact_transactions)}")
-    print(f"Web sessions: {len(fact_web_sessions)}")
+    logger.info("Generated revenue optimization dataset.")
+    logger.info("Games: %s", len(dim_games))
+    logger.info("Customers: %s", len(dim_customers))
+    logger.info("Ticket transactions: %s", len(fact_transactions))
+    logger.info("Web sessions: %s", len(fact_web_sessions))
 
 
 if __name__ == "__main__":

@@ -10,6 +10,11 @@ Outputs:
     SQL views for revenue, customers, funnel, and executive dashboard reporting.
 """
 import sqlite3
+import logging
+from src.utils.logger import configure_logging
+configure_logging()
+logger = logging.getLogger(__name__)
+
 from src.config import DATABASE_PATH, SCHEMA_DIR
 
 SQL_PATH = SCHEMA_DIR / "create_views.sql"
@@ -24,7 +29,7 @@ def create_views():
         sql = SQL_PATH.read_text()
         conn.executescript(sql)
 
-    print("SQL reporting views created successfully.")
+    logger.info("SQL reporting views created successfully.")
 
 
 if __name__ == "__main__":

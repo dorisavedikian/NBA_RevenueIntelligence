@@ -1,9 +1,14 @@
 """
 Runs the full NBA Revenue Intelligence pipeline.
 """
-
+import logging
 import subprocess
 import sys
+
+from src.utils.logger import configure_logging
+
+configure_logging()
+logger = logging.getLogger(__name__)
 
 steps = [
     "src.simulation.ticket_sales",
@@ -18,11 +23,11 @@ steps = [
 ]
 
 for step in steps:
-    print(f"\nRunning {step}...")
+    logger.info(f"\nRunning {step}...")
     result = subprocess.run([sys.executable, "-m", step])
 
     if result.returncode != 0:
-        print(f"Pipeline failed at {step}")
+        logger.error(f"Pipeline failed at {step}")
         sys.exit(result.returncode)
 
-print("\nNBA Revenue Intelligence pipeline completed successfully.")
+logger.info("\nNBA Revenue Intelligence pipeline completed successfully.")

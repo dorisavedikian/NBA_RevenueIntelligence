@@ -13,6 +13,11 @@ import sqlite3
 import numpy as np
 import pandas as pd
 
+import logging
+from src.utils.logger import configure_logging
+configure_logging()
+logger = logging.getLogger(__name__)
+
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
@@ -142,17 +147,17 @@ def run_forecasting():
         demand_metrics.to_sql("model_metrics_demand", conn, if_exists="replace", index=False)
         revenue_metrics.to_sql("model_metrics_revenue", conn, if_exists="replace", index=False)
 
-    print("Regression forecasting complete.")
-    print(f"Demand model selected: {demand_model_name}")
-    print(f"Revenue model selected: {revenue_model_name}")
-    print(f"Saved forecasts to {OUTPUT_PATH}")
-    print("Saved SQL tables: revenue_forecasts, model_metrics_demand, model_metrics_revenue")
+    logger.info("Regression forecasting complete.")
+    logger.info(f"Demand model selected: {demand_model_name}")
+    logger.info(f"Revenue model selected: {revenue_model_name}")
+    logger.info(f"Saved forecasts to {OUTPUT_PATH}")
+    logger.info("Saved SQL tables: revenue_forecasts, model_metrics_demand, model_metrics_revenue")
 
-    print("\nDemand model metrics:")
-    print(demand_metrics)
+    logger.info("\nDemand model metrics:")
+    logger.info(demand_metrics)
 
-    print("\nRevenue model metrics:")
-    print(revenue_metrics)
+    logger.info("\nRevenue model metrics:")
+    logger.info(revenue_metrics)
 
 
 if __name__ == "__main__":

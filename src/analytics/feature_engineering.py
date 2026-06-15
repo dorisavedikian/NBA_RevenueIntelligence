@@ -11,6 +11,11 @@ Outputs:
 """
 import sqlite3
 import pandas as pd
+import logging
+from src.utils.logger import configure_logging
+configure_logging()
+logger = logging.getLogger(__name__)
+
 from src.config import DATABASE_PATH, MODEL_DATASET_PATH
 
 DB_PATH = DATABASE_PATH
@@ -80,9 +85,9 @@ def build_model_dataset():
         df.to_csv(OUTPUT_PATH, index=False)
         df.to_sql("model_dataset", conn, if_exists="replace", index=False)
 
-    print(f"Created modeling dataset with {len(df)} games.")
-    print(f"Saved CSV to {OUTPUT_PATH}")
-    print("Saved SQL table: model_dataset")
+    logger.info(f"Created modeling dataset with {len(df)} games.")
+    logger.info(f"Saved CSV to {OUTPUT_PATH}")
+    logger.info("Saved SQL table: model_dataset")
 
 
 if __name__ == "__main__":

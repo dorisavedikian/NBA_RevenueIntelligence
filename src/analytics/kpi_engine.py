@@ -11,6 +11,11 @@ Outputs:
 """
 import sqlite3
 import pandas as pd
+import logging
+from src.utils.logger import configure_logging
+configure_logging()
+logger = logging.getLogger(__name__)
+
 from src.config import (
     DATABASE_PATH,
     EXECUTIVE_KPIS_PATH,
@@ -66,12 +71,12 @@ def build_executive_kpis():
         kpis.to_csv(OUTPUT_PATH, index=False)
         kpis.to_sql("executive_kpis", conn, if_exists="replace", index=False)
 
-    print("Executive KPI table created.")
-    print(f"Saved CSV to {OUTPUT_PATH}")
-    print("Saved SQL table: executive_kpis")
+    logger.info("Executive KPI table created.")
+    logger.info(f"Saved CSV to {OUTPUT_PATH}")
+    logger.info("Saved SQL table: executive_kpis")
 
-    print("\nExecutive KPI Summary:")
-    print(kpis.T)
+    logger.info("\nExecutive KPI Summary:")
+    logger.info(kpis.T)
 
 
 if __name__ == "__main__":

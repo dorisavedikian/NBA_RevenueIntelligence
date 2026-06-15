@@ -10,6 +10,10 @@ Outputs:
 """
 import sqlite3
 import pandas as pd
+import logging
+from src.utils.logger import configure_logging
+configure_logging()
+logger = logging.getLogger(__name__)
 
 from src.config import (
     DATABASE_PATH,
@@ -40,12 +44,12 @@ def load_csv_to_sql():
     for table_name, csv_path in TABLES.items():
         df = pd.read_csv(csv_path)
         df.to_sql(table_name, conn, if_exists="replace", index=False)
-        print(f"Loaded {table_name}")
+        logger.info(f"Loaded {table_name}")
 
     conn.close()
 
-    print(f"\nSQLite warehouse created:")
-    print(DATABASE_PATH)
+    logger.info(f"\nSQLite warehouse created:")
+    logger.info(DATABASE_PATH)
 
 
 def main():

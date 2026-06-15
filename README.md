@@ -28,7 +28,6 @@ End-to-End Sports Revenue Analytics Platform for Professional Sports Organizatio
 - [Project Structure](#project-structure)
 - [Installation](#installation)
 - [Results](#results)
-- [Future Enhancements](#future-enhancements)
 
 ---
 
@@ -376,34 +375,3 @@ The pipeline generates the following analytical assets:
 - Executive recommendations
 - Dashboard-ready SQL views
 
-## Future Enhancements
-
-### Data Platform
-
-- PostgreSQL migration
-- Snowflake warehouse
-- Apache Airflow orchestration
-
-### Machine Learning
-
-- Price elasticity modeling
-- Customer lifetime value
-- Propensity modeling
-- Churn prediction
-
-### Business Intelligence
-
-- Executive reporting
-- Automated KPI alerts
-
-### Deployment
-
-- Docker
-- CI/CD
-- Cloud deployment
-
-## Acknowledgements
-
-This project uses the open-source nba_api package to retrieve publicly available NBA schedule and team information.
-
-All ticketing, customer, pricing, and marketing data used throughout the project are synthetically generated for educational and portfolio purposes.

@@ -11,6 +11,11 @@ Outputs:
 """
 import sqlite3
 import pandas as pd
+import logging
+from src.utils.logger import configure_logging
+configure_logging()
+logger = logging.getLogger(__name__)
+
 from src.config import (
     DATABASE_PATH,
     EXECUTIVE_RECOMMENDATIONS_PATH,
@@ -109,9 +114,9 @@ def build_recommendations():
 
     conn.close()
 
-    print(recommendations.head())
+    logger.info(recommendations.head())
 
-    print("\nExecutive recommendations created.")
+    logger.info("\nExecutive recommendations created.")
 
 
 if __name__ == "__main__":

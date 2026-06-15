@@ -13,6 +13,11 @@ import sqlite3
 import pandas as pd
 from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
+import logging
+from src.utils.logger import configure_logging
+configure_logging()
+logger = logging.getLogger(__name__)
+
 from src.config import (
     DATABASE_PATH,
     MODEL_DATASET_PATH,
@@ -116,11 +121,11 @@ def run_kmeans():
     with sqlite3.connect(DB_PATH) as conn:
         segments.to_sql("game_segments", conn, if_exists="replace", index=False)
 
-    print("K-means segmentation complete.")
-    print(f"Saved CSV to {OUTPUT_PATH}")
-    print("Saved SQL table: game_segments")
-    print("\nSegment counts:")
-    print(segments["segment_name"].value_counts())
+    logger.info("K-means segmentation complete.")
+    logger.info(f"Saved CSV to {OUTPUT_PATH}")
+    logger.info("Saved SQL table: game_segments")
+    logger.info("\nSegment counts:")
+    logger.info(segments["segment_name"].value_counts())
 
 
 if __name__ == "__main__":
