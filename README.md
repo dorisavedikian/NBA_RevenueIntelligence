@@ -112,21 +112,27 @@ This approach enables the development of production-style data engineering pipel
 
 ## System Architecture
 
-The platform follows a modular analytics architecture that separates data ingestion, ETL, warehousing, machine learning, and business intelligence into independent components.
+The platform follows a modular analytics architecture that separates data simulation, ETL, warehousing, machine learning, and business intelligence into independent components.
 
-![Architecture](docs/images/architecture.png)
+<p align="center">
+  <img src="docs/images/architecture.png" width="900">
+</p>
 
 ## Star Schema
 
-The dimensional warehouse uses a star schema to support analytical workloads and downstream reporting.
+The dimensional data warehouse follows a star schema optimized for analytical workloads. Dimension tables describe business entities while fact tables capture transactional ticket sales and website activity.
 
-![Star Schema](docs/images/star_schema.png)
+<p align="center">
+  <img src="docs/images/star_schema.png" width="900">
+</p>
 
 ## Analytics Pipeline
 
-The end-to-end workflow begins with NBA schedule data, generates synthetic business data, performs feature engineering and machine learning, and produces executive-ready datasets for Power BI.
+The end-to-end analytics workflow transforms NBA schedule data into executive-ready business intelligence through simulation, ETL, SQL warehousing, feature engineering, machine learning, KPI generation, and recommendation engines.
 
-![Pipeline](docs/images/pipeline.png)
+<p align="center">
+  <img src="docs/images/pipeline.png" width="900">
+</p>
 
 ## Platform Components
 
@@ -138,39 +144,6 @@ The platform is organized into modular components:
 - **Feature Engineering** – Produces model-ready datasets.
 - **Machine Learning** – Performs demand segmentation and revenue forecasting.
 - **Business Intelligence Layer** – Generates KPIs, recommendations, and dashboard-ready views.
-
-## Data Pipeline
-
-The platform follows a modern analytics workflow:
-
-```text
-NBA API
-      │
-      ▼
-Simulation Engine
-      │
-      ▼
-ETL Pipeline
-      │
-      ▼
-Dimensional Data Warehouse
-      │
-      ▼
-Feature Engineering
-      │
- ┌─────┴─────────┐
- ▼               ▼
-K-Means     Regression
-      │
-      ▼
-KPI Engine
-      │
-      ▼
-Recommendation Engine
-      │
-      ▼
-Power BI Dashboard
-```
 
 ## Dimensional Data Warehouse
 
