@@ -26,6 +26,10 @@ logs/
 # Jupyter
 .ipynb_checkpoints/
 
+#GitHub Actions CI 
+.pytest_cache
+.ruff_cache
+
 # -------------------------------------------------
 # Generated Data (Large Files)
 # -------------------------------------------------
