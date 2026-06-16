@@ -9,13 +9,15 @@ Outputs:
 """
 
 import logging
+
 import matplotlib.pyplot as plt
 import pandas as pd
+
 from src.config import (
-    REVENUE_FORECASTS_PATH,
     EXECUTIVE_RECOMMENDATIONS_PATH,
     FIGURES_DIR,
     MODEL_DATASET_PATH,
+    REVENUE_FORECASTS_PATH,
 )
 from src.utils.logger import configure_logging
 
