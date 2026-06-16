@@ -25,17 +25,15 @@ An end-to-end sports analytics platform that simulates NBA ticketing operations 
 - Machine learning forecasting
 - Power BI executive dashboards
 
-## Pipeline
+## Business Problem
 
-![Pipeline](docs/images/pipeline.png)
+Professional sports organizations continuously balance ticket pricing, inventory management, marketing spend, and fan engagement to maximize revenue.
+
+This project demonstrates how an end-to-end analytics platform can transform operational ticketing data into actionable insights that support pricing strategy, demand forecasting, promotional planning, and executive decision-making.
 
 ## Overview
 
-NBA Revenue Intelligence is an end-to-end sports analytics platform that simulates the ticketing operations of a professional NBA organization.
-
-Because real ticketing and customer data are proprietary, the platform combines real NBA schedule data (via `nba_api`) with a realistic synthetic business layer that models ticket transactions, customer behavior, promotions, pricing, inventory, and web conversion funnels.
-
-The project demonstrates a complete analytics workflow including:
+The platform demonstrates a complete analytics workflow spanning:
 
 - Data simulation
 - Python ETL
@@ -68,6 +66,10 @@ The project demonstrates a complete analytics workflow including:
 
 </details>
 
+## Pipeline
+
+![Pipeline](docs/images/pipeline.png)
+
 ## Technology Stack
 
 | Category | Technologies |
@@ -88,7 +90,7 @@ The project demonstrates a complete analytics workflow including:
 
 ## Data Warehouse
 
-The platform uses a dimensional star schema consisting of:
+The platform uses a dimensional star schema with the following core tables:
 
 **Dimensions**
 
@@ -141,7 +143,7 @@ The analytics pipeline automatically generates executive datasets and visualizat
 
 ## Analytics & Decision Support
 
-The platform applies machine learning and business intelligence techniques to transform operational ticketing data into executive insights.
+The analytics layer combines machine learning and business intelligence to generate demand forecasts, executive KPIs, and actionable business recommendations.
 
 ### Machine Learning
 
@@ -220,7 +222,11 @@ cd NBA_RevenueIntelligence
 
 python -m venv .venv
 
-source .venv/bin/activate      # Windows: .venv\Scripts\activate
+# macOS/Linux
+source .venv/bin/activate
+
+# Windows
+.venv\Scripts\activate
 
 pip install -r requirements.txt
 
@@ -236,4 +242,4 @@ Running `main.py` executes the complete analytics pipeline, including data gener
 - Deploy the analytics platform to Azure or AWS.
 - Schedule automated pipeline execution using Apache Airflow.
 - Extend forecasting models with advanced machine learning techniques.
-- Create documentation.
+- Package the platform as a reusable Python library for rapid deployment across NBA organizations.
