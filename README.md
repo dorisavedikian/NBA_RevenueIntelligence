@@ -63,7 +63,7 @@ The platform combines **real NBA schedule data** from `nba_api` with a **synthet
 |-----------|--------------|
 | Programming | Python 3 |
 | Data Processing | pandas, NumPy |
-| Database | SQLite (Designed for PostgreSQL Migration) |
+| Database | SQLite |
 | SQL | Star Schema Design, SQL Views, Analytical Queries |
 | Machine Learning | scikit-learn (K-Means Clustering, Linear Regression) |
 | Data Source | `nba_api` |
@@ -223,11 +223,22 @@ python main.py
 
 Running `main.py` executes the complete analytics pipeline, including data generation, ETL, warehouse construction, feature engineering, machine learning, KPI generation, and executive recommendations.
 
-## Future Enhancements
+## Roadmap
 
-- Generalize the platform for any NBA team by externalizing team-specific assumptions into configuration files, including arena capacity, seating sections, pricing tiers, opponent demand weights, promotions, and schedule inputs.
-- Migrate the data warehouse from SQLite to PostgreSQL.
-- Deploy the analytics platform to Azure or AWS.
-- Schedule automated pipeline execution using Apache Airflow.
-- Extend forecasting models with advanced machine learning techniques.
-- Package the platform as a reusable Python library for rapid deployment across NBA organizations.
+### Version 1.0
+- End-to-end ETL pipeline
+- SQLite data warehouse
+- Machine learning forecasting
+- Executive KPI reporting
+- Power BI dashboards (pending)
+
+### Version 2.0
+- Generalize the platform for any NBA team using team-specific configuration files.
+- Externalize arena capacity, seating sections, pricing tiers, opponent demand weights, promotions, and schedule inputs.
+- Package the project as a reusable Python application with a command-line interface.
+- Enhance the simulation engine with price elasticity and customer segmentation features.
+
+### Version 3.0
+- Add Docker support for reproducible execution across environments.
+- Add scheduled pipeline execution using GitHub Actions.
+- Build an interactive Streamlit web application.
